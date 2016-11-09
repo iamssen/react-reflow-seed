@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "<project-description>",
   "scripts": {
-    "update-dependencies": "node config/dependencies.js",
+    "update-dependencies": "node config/update-dependencies.js",
+    "diff-dependencies": "node config/diff-dependencies.js",
     "clean:prod": "rimraf dist",
     "clean:dev": "rimraf dist.dev",
     "build:prod": "npm run clean:prod && cross-env NODE_ENV=production webpack --inline --colors --progress --display-error-details --display-cached",
@@ -91,6 +92,8 @@
     "@types/d3-transition": "1.0.5",
     "@types/d3-geo": "1.3.0",
     "glob": "^7.1.1",
-    "rimraf": "^2.5.4"
+    "rimraf": "^2.5.4",
+    "cli-table": "^0.3.1",
+    "chalk": "^1.1.3"
   }
 }
