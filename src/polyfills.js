@@ -1,5 +1,3 @@
-// Polyfills
-
 import 'ie-shim'; // Internet Explorer support
 
 import 'core-js/es6';
