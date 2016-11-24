@@ -1,10 +1,10 @@
 module.exports = {
   "dependencies": {
     // React
-    "react": "^15.3.2",
+    "react": "^15.4.1",
     
     // React DOM
-    "react-dom": "^15.3.2",
+    "react-dom": "^15.4.1",
     
     // React Router
     "react-router": "^3.0.0",
@@ -15,7 +15,7 @@ module.exports = {
   
   "devDependencies": {
     // Typings
-    "@types/react": "^0.14.44",
-    "@types/react-dom": "^0.14.18",
+    "@types/react": "^0.14.50",
+    "@types/react-dom": "^0.14.19",
   },
 }

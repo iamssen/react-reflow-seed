@@ -7,7 +7,7 @@ module.exports = {
     "core-js": "^2.4.1",
     
     // ES7 fetch() API
-    "whatwg-fetch": "^1.0.0",
+    "whatwg-fetch": "^2.0.1",
   },
   
   "devDependencies": {

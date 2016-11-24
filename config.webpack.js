@@ -1,34 +1,17 @@
 const webpack = require('webpack');
-const glob = require('glob');
-const path = require('path');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const copyFiles = [];
+const {apps, libs} = require('./config');
 
-copyFiles.push({
-  from: 'src.static',
-});
-
-const libs = {
-  'polyfills': './src/polyfills',
-  'vendor': './src/vendor',
-};
-
-const apps = {
-  'app': './src/app',
-};
-
-module.exports = {
+const webpackConfig = () => ({
   target: 'web',
-  
-  entry: Object.assign({}, libs, apps),
   sourcePath: './src',
   
   output: {
-    path: './dist.dev',
+    // path: './dist',
     publicPath: '/',
     filename: '[name].js',
     sourceMapFilename: '[file].map',
@@ -37,22 +20,10 @@ module.exports = {
   
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(true),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'shared',
-      chunks: Object.keys(apps),
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: Object.keys(libs).reverse(),
-      minChunks: Infinity,
-    }),
-    new CopyWebpackPlugin(copyFiles),
-    new ExtractTextPlugin("[name].css", {
-      allChunks: true,
-    }),
   ],
   
   resolve: {
-    root: [path.join(__dirname, 'src')],
+    root: ['./src'],
     extensions: ['', '.js', '.jsx', '.json'],
   },
   
@@ -107,4 +78,24 @@ module.exports = {
     clearImmediate: 0,
     setImmediate: 0,
   },
-}
+})
+
+const appConfig = () => merge(webpackConfig(), {
+  plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'shared',
+      chunks: Object.keys(apps),
+    }),
+    new ExtractTextPlugin("[name].css", {
+      allChunks: true,
+    }),
+    ...Object.keys(libs).map(name => {
+      return new webpack.DllReferencePlugin({
+        context: '.',
+        manifest: require(`./dll/${name}-manifest.json`),
+      });
+    }),
+  ],
+});
+
+module.exports = {webpackConfig, appConfig};
