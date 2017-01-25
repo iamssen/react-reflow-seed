@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
-const {apps} = require('./config');
+const {entry} = require('./config');
 const {appConfig} = require('./config.webpack');
 
 module.exports = merge(appConfig(), {
@@ -13,5 +13,5 @@ module.exports = merge(appConfig(), {
     path: './dist-debug',
   },
   
-  entry: apps,
+  entry,
 });

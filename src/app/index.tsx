@@ -1,57 +1,62 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import styled from 'styled-components';
 import {Router, hashHistory, Link, IndexLink} from 'react-router';
 import {createContext} from 'react-reflow';
-import {userInfo} from './reducers';
-import {SignButton} from './components/SignButton';
+import {horizontalList} from 'styles';
+import SignButton from './components/SignButton';
 import A from './contexts/a';
 import B from './contexts/b';
 import Counter from './contexts/counter';
-import '../shared/index.less';
-import './index.less';
+import userInfo from './states/userInfo';
 
 const history = hashHistory;
-const routeCache = {};
 
-// Reflow App Context
-const AppContext = createContext()
-  .reducers({userInfo})
-  .constants({routeCache})
-  .toComponent();
+const AppContext = createContext({
+  state: {
+    userInfo,
+  }
+})
 
 // React App Component
-class App extends React.Component {
+class App extends React.Component<{className}, {}> {
   render() {
     return (
       <AppContext>
-        <div className="App">
-          <div>
+        <div className={this.props.className}>
+          <div className="auth">
             <SignButton/>
           </div>
-          <ul>
+          <ul className="menu">
             <li><IndexLink to="/">Home</IndexLink></li>
             <li><Link to="/a">A</Link></li>
             <li><Link to="/b">B</Link></li>
             <li><Link to="/counter">Counter</Link></li>
           </ul>
-          <div>
+          <div className="contents-container">
             {this.props.children}
           </div>
         </div>
       </AppContext>
     );
   }
-  
-  componentWillMount() {
-    routeCache.location = this.props.location;
-    routeCache.params = this.props.params;
-  }
-  
-  componentWillReceiveProps(nextProps) {
-    routeCache.location = nextProps.location;
-    routeCache.params = nextProps.params;
-  }
 }
+
+const StyledApp = styled(App)`
+  .auth {
+    align-self: flex-end;
+  }
+  
+  ul.menu {
+    ${ horizontalList(10) }
+    margin: 10px 0 10px 0;
+  }
+  
+  div.contents-container {
+    background-color: #eeeeee;
+    margin-top: 20px;
+  }
+`
 
 // View Component
 const Index = () => {
@@ -67,7 +72,7 @@ const routeContents = [
 
 const routes = {
   path: '/',
-  component: App,
+  component: StyledApp,
   indexRoute: {component: Index},
   childRoutes: routeContents,
 }

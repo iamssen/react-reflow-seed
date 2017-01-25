@@ -1,10 +1,12 @@
 const webpack = require('webpack');
+const path = require('path');
+const fs = require('fs');
 const autoprefixer = require('autoprefixer');
 const precss = require('precss');
 const merge = require('webpack-merge');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-const {apps, libs} = require('./config');
+const {entry, dlls} = require('./config');
 
 const webpackConfig = () => ({
   target: 'web',
@@ -24,19 +26,22 @@ const webpackConfig = () => ({
   
   resolve: {
     root: ['./src'],
-    extensions: ['', '.js', '.jsx', '.json'],
+    extensions: ['', '.ts', '.tsx', '.js', '.jsx', '.json'],
+    alias: fs.readdirSync('src/shared')
+             .map(dir => 'src/shared/' + dir)
+             .filter(dir => fs.statSync(dir).isDirectory())
+             .reduce((alias, dir) => {
+               alias[path.basename(dir)] = path.resolve(__dirname, dir);
+               return alias;
+             }, {}),
   },
   
   module: {
     loaders: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.(ts|tsx)$/,
         exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          presets: ['es2015', 'react'],
-          plugins: ['transform-class-properties'],
-        }
+        loader: 'ts'
       },
       {
         test: /\.css$/,
@@ -84,12 +89,12 @@ const appConfig = () => merge(webpackConfig(), {
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       name: 'shared',
-      chunks: Object.keys(apps),
+      chunks: Object.keys(entry),
     }),
     new ExtractTextPlugin("[name].css", {
       allChunks: true,
     }),
-    ...Object.keys(libs).map(name => {
+    ...Object.keys(dlls).map(name => {
       return new webpack.DllReferencePlugin({
         context: '.',
         manifest: require(`./dll/${name}-manifest.json`),

@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "moduleResolution": "node",
+    "jsx": "react",
+    "skipLibCheck": true,
+    "lib": [
+      "dom",
+      "es2015",
+      "es2016"
+    ],
+    "baseUrl": "src",
+    "paths": {
+      "components": [
+        "shared/components"
+      ],
+      "components/*": [
+        "shared/components/*"
+      ],
+      "styles": [
+        "shared/styles"
+      ],
+      "styles/*": [
+        "shared/styles/*"
+      ]
+    }
+  }
+}

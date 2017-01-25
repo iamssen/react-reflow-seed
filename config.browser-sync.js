@@ -4,7 +4,7 @@ const merge = require('webpack-merge');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 
-const {apps} = require('./config');
+const {entry} = require('./config');
 const {appConfig} = require('./config.webpack');
 
 const config = merge(appConfig(), {
@@ -16,12 +16,11 @@ const config = merge(appConfig(), {
     path: '/',
   },
   
-  entry: Object.keys(apps).reduce((obj, app) => {
-    obj[app] = [
+  entry: Object.keys(entry).reduce((obj, name) => {
+    obj[name] = [
       'webpack/hot/dev-server',
       'webpack-hot-middleware/client?reload=true',
-      apps[app],
-    ]
+    ].concat(Array.isArray(entry[name]) ? entry[name] : [entry[name]])
     return obj;
   }, {}),
   
@@ -35,6 +34,9 @@ const config = merge(appConfig(), {
 const bundler = webpack(config);
 
 browserSync({
+  port: process.env.PORT || 3000,
+  open: false,
+  
   server: {
     baseDir: ['dll', 'static'],
     

@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const merge = require('webpack-merge');
 
-const {libs} = require('./config');
+const {dlls} = require('./config');
 const {webpackConfig} = require('./config.webpack');
 
 module.exports = merge(webpackConfig(), {
@@ -12,7 +12,7 @@ module.exports = merge(webpackConfig(), {
     library: '[name]_lib',
   },
   
-  entry: libs,
+  entry: dlls,
   
   plugins: [
     new webpack.DllPlugin({

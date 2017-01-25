@@ -5,6 +5,7 @@
 /.idea/
 
 /yarn.lock
+/.yarnclean
 /*.log
 
 /dll

@@ -1,10 +1,15 @@
-const apps = {
+const entry = {
+  'init': [
+    './src/polyfills'
+  ],
   'app': './src/app'
 }
 
-const libs = {
-  'polyfills': ['./src/polyfills'],
-  'vendor': ['./src/vendor'],
+const dlls = {
+  dll: [
+    './src/vendor',
+    './src/polyfills',
+  ]
 }
 
-module.exports = {apps, libs};
+module.exports = {entry, dlls};
