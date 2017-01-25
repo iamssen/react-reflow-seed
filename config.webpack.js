@@ -1,10 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
-const autoprefixer = require('autoprefixer');
-const precss = require('precss');
 const merge = require('webpack-merge');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const {entry, dlls} = require('./config');
 
@@ -44,14 +41,6 @@ const webpackConfig = () => ({
         loader: 'ts'
       },
       {
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss')
-      },
-      {
-        test: /\.less$/,
-        loader: ExtractTextPlugin.extract('style', 'css!postcss!less')
-      },
-      {
         test: /\.html$/,
         loader: 'raw'
       },
@@ -70,11 +59,6 @@ const webpackConfig = () => ({
     ]
   },
   
-  postcss: () => [
-    autoprefixer,
-    precss,
-  ],
-  
   node: {
     global: 1,
     crypto: 'empty',
@@ -90,9 +74,6 @@ const appConfig = () => merge(webpackConfig(), {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'shared',
       chunks: Object.keys(entry),
-    }),
-    new ExtractTextPlugin("[name].css", {
-      allChunks: true,
     }),
     ...Object.keys(dlls).map(name => {
       return new webpack.DllReferencePlugin({
