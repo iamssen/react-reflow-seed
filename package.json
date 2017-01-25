@@ -74,8 +74,6 @@
     "@types/react-dom": "^0.14.21",
     "@types/whatwg-fetch": "^0.0.33",
     "browser-sync": "^2.18.6",
-    "chalk": "^1.1.3",
-    "cli-table": "^0.3.1",
     "copy-webpack-plugin": "^4.0.1",
     "glob": "^7.1.1",
     "json-loader": "^0.5.4",
