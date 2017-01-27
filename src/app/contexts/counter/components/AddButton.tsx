@@ -1,15 +1,11 @@
 import * as React from 'react';
-import provideCount, {Props} from '../providers/provideCount';
+import {CountProps} from '../context';
 import {Button} from 'components';
 
-export {default as provide, Props} from '../providers/provideCount';
-
-export class Component extends React.Component<Props, {}> {
+export default class extends React.Component<CountProps, {}> {
   render() {
     return (
       <Button onClick={this.props.add}>Add</Button>
     )
   }
 }
-
-export default provideCount(Component);

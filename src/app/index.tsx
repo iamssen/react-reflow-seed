@@ -2,21 +2,10 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import {Router, hashHistory, Link, IndexLink} from 'react-router';
-import {createContext} from 'react-reflow';
+import AppContext, {SignButton, A, B, Counter} from './context';
 import {horizontalList} from 'styles';
-import SignButton from './components/SignButton';
-import A from './contexts/a';
-import B from './contexts/b';
-import Counter from './contexts/counter';
-import userInfo from './states/userInfo';
 
 const history = hashHistory;
-
-const AppContext = createContext({
-  state: {
-    userInfo,
-  }
-})
 
 // React App Component
 class App extends React.Component<{className}, {}> {

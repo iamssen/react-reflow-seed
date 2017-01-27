@@ -1,7 +1,5 @@
 import {provide} from 'react-reflow';
-import {UserInfo} from '../states/userInfo';
-import login from '../actions/login';
-import logout from '../actions/logout';
+import {UserInfo, logout, login} from '../context';
 
 export type Props = {
   userInfo: UserInfo,

@@ -1,9 +1,7 @@
 import * as React from 'react';
-import provideUserInfo, {Props} from '../providers/provideUserInfo';
+import {UserInfoProps} from '../context';
 
-export {default as provide, Props} from '../providers/provideUserInfo';
-
-export class Component extends React.Component<Props, {}> {
+export default class extends React.Component<UserInfoProps, {}> {
   render() {
     return (
       <p>
@@ -19,5 +17,3 @@ export class Component extends React.Component<Props, {}> {
     )
   }
 }
-
-export default provideUserInfo(Component);

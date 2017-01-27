@@ -1,7 +1,5 @@
 import {provide} from 'react-reflow';
-import add from '../actions/add';
-import subtract from '../actions/subtract';
-import {UserInfo} from '../../../states/userInfo';
+import {add, subtract, UserInfo} from '../context';
 
 export type Props = {
   add: () => void,

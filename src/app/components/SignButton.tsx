@@ -1,10 +1,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import provideUserInfo, {Props} from '../providers/provideUserInfo';
+import {UserInfoProps} from '../context';
 
-export {default as provide, Props} from '../providers/provideUserInfo';
-
-export class View extends React.Component<Props & {className}, {}> {
+export class Component extends React.Component<UserInfoProps & {className: string}, {}> {
   render() {
     return this.props.userInfo
       ? (
@@ -25,4 +23,4 @@ export const style: string = `// styled
   font-weight: bold;
 `
 
-export default provideUserInfo(styled(View)`${style}`);
+export default styled(Component)`${style}`;
