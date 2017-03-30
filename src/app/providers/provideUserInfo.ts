@@ -1,16 +1,16 @@
-import {provide} from 'react-reflow';
-import {UserInfo, logout, login} from '../context';
+import {logout, login} from '../context';
+import {UserInfo} from '../types';
 
-export type Props = {
+export type UserInfoProps = {
   userInfo: UserInfo,
   login: () => void,
   logout: () => void,
 }
 
-export default provide(
-  observe => observe('userInfo'),
-  ({dispatch}) => ({
+export default {
+  mapState: observe => observe('userInfo'),
+  mapHandlers: ({dispatch}) => ({
     login: () => dispatch(login()),
     logout: () => dispatch(logout()),
   })
-)
+}

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CountProps} from '../context';
+import {CountProps} from '../types';
 import {Button} from 'components';
 
 export default class extends React.Component<CountProps, {}> {

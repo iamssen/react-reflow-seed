@@ -1,27 +1,28 @@
-import {createContext} from 'react-reflow';
-import userInfo, {UserInfo} from './states/userInfo';
-import provideUserInfo, {Props as UserInfoProps} from './providers/provideUserInfo';
-import SignButton$ from './components/SignButton';
-import login$ from './actions/login';
-import logout from './actions/logout';
-import A from './contexts/a';
-import B from './contexts/b';
-import Counter from './contexts/counter';
+import {createContext, provide} from 'react-reflow';
+import _SignButton from './components/SignButton';
+import _login from './actions/login';
+import userInfo from './states/userInfo';
+import provideUserInfo from './providers/provideUserInfo';
 
-const SignButton = provideUserInfo(SignButton$);
+// actions
 const login = () => {
   console.log('wrapped(login())');
-  return login$();
+  return _login();
 }
 
-export {
-  /* components */ SignButton,
-  /* types */ UserInfo,
-  /* props */ UserInfoProps,
-  /* actions */ login, logout,
-  /* contexts */ A, B, Counter,
-}
+export {default as logout} from './actions/logout';
+export {login};
 
+// contexts
+export {default as A} from './contexts/a';
+export {default as B} from './contexts/b';
+export {default as Counter} from './contexts/counter';
+
+// components
+const SignButton = provide(provideUserInfo)(_SignButton);
+export {SignButton};
+
+// context
 export default createContext({
   state: {
     userInfo,

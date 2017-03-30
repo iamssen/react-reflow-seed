@@ -1,9 +1,10 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import {UserInfoProps} from '../context';
+import {UserInfoProps} from '../types';
 
 export class Component extends React.Component<UserInfoProps & {className: string}, {}> {
   render() {
+    //debugger;
     return this.props.userInfo
       ? (
         <button className={this.props.className} onClick={this.props.logout}>

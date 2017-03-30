@@ -1,6 +1,6 @@
-import {ActionTools} from 'react-reflow';
+import {Tools} from 'react-reflow';
 
-export default () => ({observe, dispatch}:ActionTools) => {
+export default () => ({observe, dispatch}:Tools) => {
   observe('count').first().subscribe(({count}) => {
     dispatch({
       count: count - 1,

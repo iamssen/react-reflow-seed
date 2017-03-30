@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {UserInfoProps} from '../context';
+import {CountProps, UserInfoProps} from '../types';
 
-export default class extends React.Component<UserInfoProps, {}> {
+export default class extends React.Component<UserInfoProps & CountProps, {}> {
   render() {
     return (
       <p>

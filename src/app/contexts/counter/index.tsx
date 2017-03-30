@@ -1,18 +1,16 @@
 import * as React from 'react';
-import Context, {CountView, AddButton, SubtractButton} from './context';
+import Context, { AddButton, CountView, SubtractButton } from './context';
 
-export default () => {
-  return (
-    <Context>
+export default () => (
+  <Context>
+    <div>
       <div>
-        <div>
-          <CountView/>
-        </div>
-        <div>
-          <AddButton/>
-          <SubtractButton/>
-        </div>
+        <CountView/>
       </div>
-    </Context>
-  )
-}
+      <div>
+        <AddButton/>
+        <SubtractButton/>
+      </div>
+    </div>
+  </Context>
+);

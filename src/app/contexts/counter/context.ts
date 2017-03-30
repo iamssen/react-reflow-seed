@@ -1,27 +1,24 @@
-import {createContext} from 'react-reflow';
-import add from './actions/add';
-import subtract from './actions/subtract';
+import { createContext, provide } from 'react-reflow';
 import count from './states/count';
-import {UserInfo} from '../../context';
-import provideUserInfo, {Props as UserInfoProps} from './providers/provideUserInfo';
-import provideCount, {Props as CountProps} from './providers/provideCount';
-import AddButton$ from './components/AddButton';
-import CountView$ from './components/CountView';
-import SubtractButton$ from './components/SubtractButton';
+import provideUserInfo from '../../providers/provideUserInfo';
+import provideCount from './providers/provideCount';
+import _AddButton from './components/AddButton';
+import _CountView from './components/CountView';
+import _SubtractButton from './components/SubtractButton';
 
-const AddButton = provideCount(AddButton$);
-const SubtractButton = provideCount(SubtractButton$);
-const CountView = provideUserInfo(CountView$);
+// actions
+export { default as add } from './actions/add';
+export { default as subtract } from './actions/subtract';
 
-export {
-  /* components */ AddButton, SubtractButton, CountView,
-  /* types */ UserInfo,
-  /* props */ UserInfoProps, CountProps,
-  /* actions */ add, subtract,
-}
+// components
+const AddButton = provide(provideCount)(_AddButton);
+const SubtractButton = provide(provideCount)(_SubtractButton);
+const CountView = provide(provideCount, provideUserInfo)(_CountView);
+export { AddButton, SubtractButton, CountView };
 
+// context
 export default createContext({
   state: {
     count,
-  }
-})
+  },
+});
