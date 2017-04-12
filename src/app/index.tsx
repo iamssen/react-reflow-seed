@@ -1,9 +1,10 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import styled from 'styled-components';
 import { HashRouter, Link, Route } from 'react-router-dom';
-import AppContext, { SignButton, A, B, Counter } from './context';
+import styled from 'styled-components';
 import { horizontalList } from 'styles';
+import { A, B, Counter, SignButton } from './components';
+import AppContext from './context';
 
 class App extends React.Component<{className}, {}> {
   render() {

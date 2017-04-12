@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {CountProps, UserInfoProps} from '../types';
+import { CountProps, UserInfoProps } from '../types';
 
 export default class extends React.Component<UserInfoProps & CountProps, {}> {
   render() {
@@ -8,12 +8,10 @@ export default class extends React.Component<UserInfoProps & CountProps, {}> {
         {this.props.count}
         {
           this.props.userInfo
-            ? (
-              <span> {this.props.userInfo.name}</span>
-            )
+            ? <span> {this.props.userInfo.name}</span>
             : null
         }
       </p>
-    )
+    );
   }
 }

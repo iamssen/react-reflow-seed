@@ -1,2 +1,7 @@
-export {UserInfo, UserInfoProps} from '../../types';
-export {CountProps} from './providers/provideCount';
+export { UserInfo, UserInfoProps } from '../../types';
+
+export type CountProps = {
+  add: () => void,
+  subtract: () => void,
+  count: number,
+}

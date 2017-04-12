@@ -1,2 +1,9 @@
-export {UserInfoProps} from './providers/provideUserInfo';
-export {UserInfo} from './states/userInfo';
+export type UserInfo = {
+  name: string,
+}
+
+export type UserInfoProps = {
+  userInfo: UserInfo,
+  login: () => void,
+  logout: () => void,
+}

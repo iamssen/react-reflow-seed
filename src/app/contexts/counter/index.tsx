@@ -1,5 +1,6 @@
 import * as React from 'react';
-import Context, { AddButton, CountView, SubtractButton } from './context';
+import { AddButton, CountView, SubtractButton } from './components';
+import Context from './context';
 
 export default () => (
   <Context>
